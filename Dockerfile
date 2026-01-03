@@ -1,7 +1,14 @@
+# Use official PHP with Apache
 FROM php:8.2-apache
 
-RUN docker-php-ext-install pdo pdo_mysql
+# Install PostgreSQL driver
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql
 
-COPY . /var/www/html/
+# Copy your app into the container
+COPY . /var/www/html
 
-EXPOSE 80
+# Optional: enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+EXPOSE 10000
