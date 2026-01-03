@@ -1,12 +1,14 @@
 <?php
-$host = "fdb1032.awardspace.net";
-$db   = "4716748_productsdb";
-$user = "4716748_productsdb";
-$pass = "hasan_222";
+// Database credentials
+$host = "dpg-d5cpurqli9vc73cv2j80-a";
+$port = 5432;
+$db   = "lost_qd0g";
+$user = "hasan";
+$pass = "AobWu8xhasZRzEJkY31jucoR5REWxVub";
 
 try {
     $conn = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8mb4",
+        "pgsql:host=$host;port=$port;dbname=$db",
         $user,
         $pass,
         [
@@ -18,7 +20,7 @@ try {
     http_response_code(500);
     echo json_encode([
         "success" => false,
-        "error" => "Database connection failed"
+        "error" => "Database connection failed: " . $e->getMessage()
     ]);
     exit;
 }
